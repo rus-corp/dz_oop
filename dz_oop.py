@@ -36,14 +36,9 @@ class Student:
             return
         return self.av_grade() < other.av_grade()
 
-    
-
-
-
-
-
+     
     def __str__(self):
-        res_1 = f' Имя: {self.name}\n Фамилия:{self.surname}\n Средняя оценка за домашние задания: {self.av_grade()}\n Курсы в процессе изучения: {self.courses_in_progress}\n Завершенные курсы: {self.finished_courses}'
+        res_1 = f' Имя: {self.name}\n class list: {self.class_list()}\n Фамилия:{self.surname}\n Средняя оценка за домашние задания: {self.av_grade()}\n Курсы в процессе изучения: {self.courses_in_progress}\n Завершенные курсы: {self.finished_courses}'
         return res_1
 
 
@@ -55,8 +50,6 @@ class Mentor:
         
         
         
-
-
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
@@ -107,18 +100,7 @@ class Reviewer(Mentor):
   
 
 
- 
-# best_student = Student('Ruoy', 'Eman', 'your_gender')
-# best_student.courses_in_progress += ['Python']
- 
-# cool_mentor = Mentor('Some', 'Buddy')
-# cool_mentor.courses_attached += ['Python']
- 
-# cool_mentor.rate_hw(best_student, 'Python', 10)
-# cool_mentor.rate_hw(best_student, 'Python', 10)
-# cool_mentor.rate_hw(best_student, 'Python', 10)
- 
-# print(best_student.grades)
+
 
 rus = Student('Ruslan', 'Prusakov', 'mens')
 rus.courses_in_progress += ['Python']
@@ -158,10 +140,19 @@ rus.rate_hw(first_lector, 'Git', 10)
 rus.rate_hw(first_lector, 'Git', 9)
 rus.rate_hw(first_lector, 'Git', 7)
 
-print(rus)
-print()
-print(ven)
-print(rus > ven)
+second_lector = Lecturer('Rad', 'Asd')
+second_lector.ending_courses += ['Python']
+second_lector.ending_courses += ['Git']
+rus.rate_hw(second_lector, 'Python', 4)
+rus.rate_hw(second_lector, 'Python', 10)
+rus.rate_hw(second_lector, 'Python', 9)
+rus.rate_hw(second_lector, 'Git', 3)
+rus.rate_hw(second_lector, 'Git', 8)
+rus.rate_hw(second_lector, 'Git', 5)
+# print(rus)
+# print()
+# print(ven)
+# print(rus > ven)
 # print()
 # print(first_reviewer)
 # print()
@@ -169,29 +160,37 @@ print(rus > ven)
 # print()
 
 
-# brus = Reviewer ('Papa', 'Djons')
-# brus.courses_attached += ['Python']
-# brus.rate_hw(rus, 'Phyton', 10)
-
-# brus.courses_attached += ['Git']
-# brus.rate_hw(rus, 'Git', 8)
-
-# brus.courses_attached += ['OOP']
-# brus.rate_hw(rus, 'OOP', 6)
-
-
-
-
-
+        
 
 # print(rus.name)
 # print(rus.surname)
 # print(rus.courses_in_progress)
 # print(rus.finished_courses)
-# print(rus.grades)
+
+student_list = [rus, ven]
+
+student_list = [rus, ven]
+course_name = input("course name? ")
+
+lectors_list = [first_lector, second_lector]
+
+
+def new_grade_of_student(student_list, course_name):
+    new_list = []
+    for student in student_list:
+        new_list.extend(student.grades.get(course_name, []))
+        res = round(sum(new_list) / len(new_list), 1)
+    print(res)
+
+
+def new_grade_of_lectors(lectors_list, course_name):
+    new_list_1 = []
+    for lector in lectors_list:
+        new_list_1.extend(lector.courses_grades.get(course_name, []))
+        res = round(sum(new_list_1) / len(new_list_1), 1)
+    print(res)
 
 
 
-
-
-
+new_grade_of_student(student_list, course_name)
+new_grade_of_lectors(lectors_list, course_name)
